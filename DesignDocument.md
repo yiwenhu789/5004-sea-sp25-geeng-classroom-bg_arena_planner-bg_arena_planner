@@ -133,9 +133,17 @@ Write a test (in english) that you can picture for the class diagram you have cr
 
 You should feel free to number your brainstorm. 
 
-1. Test 1..
-2. Test 2..
-
+1. Test filtering by minimum players (minPlayers>2).
+2. Test filtering by maximum players (maxPlayers<6).
+3. Test filtering by the year published (year>2000).
+4. Test filtering by difficulty (difficulty>=3.0).
+5. Test filtering by name contains (name~=catan).
+6. Test multiple conditions (minPlayers>2,maxPlayers<6).
+7. Test resetting the planner (reset())
+8. Test Sorting by Year Published (Ascending)
+9. Test Sorting by Year Published (Descending)
+10. Test Sorting by Difficulty (Ascending)
+11. Test Sorting by Difficulty (Descending)
 
 
 
