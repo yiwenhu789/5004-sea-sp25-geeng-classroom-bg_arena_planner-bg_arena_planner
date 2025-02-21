@@ -12,13 +12,110 @@ Place your class diagrams below. Make sure you check the file in the browser on 
 
 Provide a class diagram for the provided code as you read through it.  For the classes you are adding, you will create them as a separate diagram, so for now, you can just point towards the interfaces for the provided code diagram.
 
+```mermaid
+classDiagram
+    class BGArenaPlanner {
+        +main(String[] args) : void
+    }
+
+    class Planner {
+        +filter(String filter, GameData sortOn, boolean ascending)
+        +reset()
+    }
+
+    class IPlanner {
+        <<interface>>
+        +filter(String filter, GameData sortOn, boolean ascending)
+        +reset()
+    }
+    
+    class BoardGame {
+        -String name
+        -int minPlayers
+        -int maxPlayers
+        -int minTime
+        -int maxTime
+        -double difficulty
+        -int rank
+        -double rating
+        -int year
+        +toStringWithInfo(GameData col) : String
+    }
+    
+    class GameData {
+        <<enumeration>>
+        +NAME
+        +ID
+        +MIN_PLAYERS
+        +MAX_PLAYERS
+        +MIN_TIME
+        +MAX_TIME
+        +DIFFICULTY
+        +RANK
+        +RATING
+        +YEAR
+        +fromString(String columnName) : GameData
+    }
+
+    class IGameList {
+        <<interface>>
+        +List<String> getGameNames()
+        +void clear()
+        +int count()
+        +void saveGame(String filename)
+        +void addToList(String str, Stream<BoardGame> filtered)
+        +void removeFromList(String str)
+    }
+
+    class GameList {
+        +GameList()
+        +getGameNames()
+        +clear()
+        +count()
+        +saveGame(String filename)
+        +addToList(String str, Stream<BoardGame> filtered)
+        +removeFromList(String str)
+    }
+    
+    class GamesLoader {
+        +loadGamesFile(String filename) : Set<BoardGame>
+    }
+    
+    class Operations {
+        <<enumeration>>
+        +GREATER_EQUAL
+        +LESS_EQUAL
+        +EQUAL
+        +NOT_EQUAL
+        +APPROX_EQUAL
+        +getOperatorFromStr(String op) : Operations
+    }
+    
+    class ConsoleApp {
+        +processFilter()
+        +processListCommands()
+        +processHelp()
+    }
+    
+    BGArenaPlanner --> Planner
+    Planner --> BoardGame
+    BoardGame --> GameData
+    Planner --> IGameList
+    IGameList <|-- GameList
+    Planner --> GamesLoader
+    GamesLoader --> BoardGame
+    Planner --> IPlanner
+    Planner --> Operations
+    ConsoleApp --> IGameList
+    ConsoleApp --> IPlanner
+```
 
 
 ### Your Plans/Design
 
 Create a class diagram for the classes you plan to create. This is your initial design, and it is okay if it changes. Your starting points are the interfaces. 
 
-
+I plan to use the existing interfaces and classes without adding new ones because they already cover all needed functions. `Planner` handles filtering, `GameList` manages the game list, and `GamesLoader` loads data. `ConsoleApp` manages user input. Since these classes already do their jobs well, no extra classes are needed. If the project gets more complex later, I can adjust the design.
 
 
 
